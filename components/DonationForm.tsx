@@ -117,7 +117,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ onAddMedication, showSucces
           </div>
 
           <div>
-            <label htmlFor="storageConditions" className="block text-sm font-medium text-slate-700">Condiciones de Almacenamiento</p>
+            <label htmlFor="storageConditions" className="block text-sm font-medium text-slate-700">Condiciones de Almacenamiento</label>
             <input type="text" id="storageConditions" value={storageConditions} onChange={e => setStorageConditions(e.target.value)} placeholder="Ej: Lugar fresco y seco" className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" required />
             {errors.storageConditions && <p className="text-red-500 text-xs mt-1">{errors.storageConditions}</p>}
           </div>
