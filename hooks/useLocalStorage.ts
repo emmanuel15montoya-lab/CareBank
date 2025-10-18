@@ -1,5 +1,7 @@
 
-import { useState, useEffect } from 'react';
+
+// FIX: Import React to provide the namespace for type annotations like React.Dispatch.
+import React, { useState, useEffect } from 'react';
 
 function getValue<T,>(key: string, initialValue: T | (() => T)): T {
   const savedValue = localStorage.getItem(key);

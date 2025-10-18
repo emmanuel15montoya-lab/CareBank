@@ -12,6 +12,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ onAddMedication, showSucces
   const [quantity, setQuantity] = useState('');
   const [storageConditions, setStorageConditions] = useState('');
   const [location, setLocation] = useState('');
+  const [requiresPrescription, setRequiresPrescription] = useState(false);
   const [photo, setPhoto] = useState<string | undefined>(undefined);
   const [photoPreview, setPhotoPreview] = useState<string | undefined>(undefined);
   const [donorEmail, setDonorEmail] = useState('');
@@ -62,6 +63,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ onAddMedication, showSucces
       quantity,
       storageConditions,
       location,
+      requiresPrescription,
       photo,
       donorEmail,
       donorPhone,
@@ -75,6 +77,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ onAddMedication, showSucces
     setQuantity('');
     setStorageConditions('');
     setLocation('');
+    setRequiresPrescription(false);
     setPhoto(undefined);
     setPhotoPreview(undefined);
     setDonorEmail('');
@@ -122,6 +125,38 @@ const DonationForm: React.FC<DonationFormProps> = ({ onAddMedication, showSucces
             {errors.storageConditions && <p className="text-red-500 text-xs mt-1">{errors.storageConditions}</p>}
           </div>
 
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-slate-700">¿Requiere receta médica?</label>
+            <div className="mt-2 flex items-center gap-x-6">
+              <div className="flex items-center gap-x-2">
+                <input 
+                  id="prescription-yes" 
+                  name="prescription" 
+                  type="radio" 
+                  checked={requiresPrescription}
+                  onChange={() => setRequiresPrescription(true)}
+                  className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-600"
+                />
+                <label htmlFor="prescription-yes" className="block text-sm font-medium leading-6 text-gray-900">
+                  Sí, con receta
+                </label>
+              </div>
+              <div className="flex items-center gap-x-2">
+                <input 
+                  id="prescription-no" 
+                  name="prescription" 
+                  type="radio" 
+                  checked={!requiresPrescription}
+                  onChange={() => setRequiresPrescription(false)}
+                  className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-600"
+                />
+                <label htmlFor="prescription-no" className="block text-sm font-medium leading-6 text-gray-900">
+                  No, sin receta
+                </label>
+              </div>
+            </div>
+          </div>
+          
           <div className="md:col-span-2 border-t border-slate-200 pt-6 mt-2">
              <p className="text-base font-semibold text-slate-800 mb-4">Tu Información de Contacto</p>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

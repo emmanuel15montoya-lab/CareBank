@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Medication } from '../types';
-import { CalendarIcon, LocationMarkerIcon, ThermometerIcon, PackageIcon } from './Icons';
+import { CalendarIcon, LocationMarkerIcon, ThermometerIcon, PackageIcon, PrescriptionIcon } from './Icons';
 
 interface MedicationCardProps {
   medication: Medication;
@@ -8,7 +8,7 @@ interface MedicationCardProps {
 }
 
 const MedicationCard: React.FC<MedicationCardProps> = ({ medication, onContact }) => {
-  const { name, expirationDate, quantity, storageConditions, location, photo } = medication;
+  const { name, expirationDate, quantity, storageConditions, location, photo, requiresPrescription } = medication;
 
   const getExpirationStatus = () => {
     const today = new Date();
@@ -45,6 +45,12 @@ const MedicationCard: React.FC<MedicationCardProps> = ({ medication, onContact }
           <div className="flex items-center gap-2">
             <LocationMarkerIcon className="w-5 h-5 text-slate-500" />
             <span className="text-slate-700">{location}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <PrescriptionIcon className="w-5 h-5 text-slate-500" />
+            <span className={`font-medium ${requiresPrescription ? 'text-amber-700' : 'text-slate-700'}`}>
+              {requiresPrescription ? 'Requiere receta' : 'Venta libre'}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <ThermometerIcon className="w-5 h-5 text-slate-500" />
