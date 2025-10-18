@@ -112,14 +112,14 @@ const DonationForm: React.FC<DonationFormProps> = ({ onAddMedication, showSucces
             <input type="text" id="quantity" value={quantity} onChange={e => setQuantity(e.target.value)} placeholder="Ej: 1 caja de 20 pastillas" className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" required />
             {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
           </div>
-          
-          <div>
-            <label htmlFor="location" className="block text-sm font-medium text-slate-700">Ubicación (Ciudad, Provincia)</label>
-            <input type="text" id="location" value={location} onChange={e => setLocation(e.target.value)} placeholder="Ej: Madrid, España" className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" required />
+
+          <div className="md:col-span-2">
+            <label htmlFor="location" className="block text-sm font-medium text-slate-700">Ubicación (Ciudad, Estado)</label>
+            <input type="text" id="location" value={location} onChange={e => setLocation(e.target.value)} placeholder="Ej: Guadalajara, Jalisco" className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" required />
             {errors.location && <p className="text-red-500 text-xs mt-1">{errors.location}</p>}
           </div>
-
-          <div>
+          
+          <div className='md:col-span-2'>
             <label htmlFor="storageConditions" className="block text-sm font-medium text-slate-700">Condiciones de Almacenamiento</label>
             <input type="text" id="storageConditions" value={storageConditions} onChange={e => setStorageConditions(e.target.value)} placeholder="Ej: Lugar fresco y seco" className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500" required />
             {errors.storageConditions && <p className="text-red-500 text-xs mt-1">{errors.storageConditions}</p>}

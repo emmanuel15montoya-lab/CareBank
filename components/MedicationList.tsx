@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import type { Medication } from '../types';
 import MedicationCard from './MedicationCard';
-// FIX: Import PackageIcon to be used when no medications are found.
 import { SearchIcon, PackageIcon } from './Icons';
 
 interface MedicationListProps {
@@ -11,27 +10,27 @@ interface MedicationListProps {
 
 const MedicationList: React.FC<MedicationListProps> = ({ medications, onContact }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [locationFilter, setLocationFilter] = useState('');
+  const [locationTerm, setLocationTerm] = useState('');
 
   const filteredMedications = useMemo(() => {
     return medications
       .filter(med => {
         const searchTermLower = searchTerm.toLowerCase();
-        const locationFilterLower = locationFilter.toLowerCase();
+        const locationTermLower = locationTerm.toLowerCase();
         
         const nameMatch = med.name.toLowerCase().includes(searchTermLower);
-        const locationMatch = med.location.toLowerCase().includes(locationFilterLower);
+        const locationMatch = med.location.toLowerCase().includes(locationTermLower);
 
         return nameMatch && locationMatch;
       })
       .sort((a, b) => new Date(a.expirationDate).getTime() - new Date(b.expirationDate).getTime());
-  }, [medications, searchTerm, locationFilter]);
+  }, [medications, searchTerm, locationTerm]);
 
   return (
     <div>
       <div className="bg-white p-6 rounded-xl shadow-lg mb-8 max-w-4xl mx-auto animate-fade-in-up">
         <h2 className="text-2xl font-bold text-slate-800 mb-2">Encuentra un Medicamento</h2>
-        <p className="text-slate-600 mb-4">Busca por nombre o ubicación para ver las donaciones disponibles cerca de ti.</p>
+        <p className="text-slate-600 mb-4">Busca por nombre y filtra por ubicación para ver las donaciones disponibles.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -46,14 +45,14 @@ const MedicationList: React.FC<MedicationListProps> = ({ medications, onContact 
             />
           </div>
           <div className="relative">
-             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <SearchIcon className="h-5 w-5 text-gray-400" />
             </div>
             <input
               type="text"
               placeholder="Filtrar por ubicación..."
-              value={locationFilter}
-              onChange={(e) => setLocationFilter(e.target.value)}
+              value={locationTerm}
+              onChange={(e) => setLocationTerm(e.target.value)}
               className="block w-full pl-10 pr-3 py-2 border border-slate-300 rounded-md leading-5 bg-white placeholder-slate-500 focus:outline-none focus:placeholder-slate-400 focus:ring-1 focus:ring-teal-500 focus:border-teal-500"
             />
           </div>
