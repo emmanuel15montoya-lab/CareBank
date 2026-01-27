@@ -1,3 +1,4 @@
+
 export interface Medication {
   id: string;
   name: string;
@@ -6,9 +7,17 @@ export interface Medication {
   storageConditions: string;
   location: string;
   requiresPrescription: boolean;
-  photo?: string; // base64 encoded image
+  photo?: string;
   donorEmail: string;
   donorPhone?: string;
 }
 
-export type AppView = 'search' | 'donate';
+export type UserRole = 'admin' | 'guest';
+
+export interface User {
+  email: string;
+  role: UserRole;
+  name: string;
+}
+
+export type AppView = 'search' | 'donate' | 'login' | 'dashboard';
